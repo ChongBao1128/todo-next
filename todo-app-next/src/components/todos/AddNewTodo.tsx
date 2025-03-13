@@ -5,16 +5,22 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { useState } from "react";
 
-const AddNewTodo = () => {
+type AddNewTodoProps = {
+    refetch: () => void;
+}
+
+const AddNewTodo = ({refetch}: AddNewTodoProps) => {
     const [task, setTask] = useState<string>('');
 
     const handleAddTask = async (task: string) => {
-        console.log(task)
         await postTodo({
           task,
           is_complete: false,
           inserted_at: new Date(),
         });
+
+        refetch();
+        setTask('');
       }
 
     return (

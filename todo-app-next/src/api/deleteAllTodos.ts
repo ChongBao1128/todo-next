@@ -1,11 +1,11 @@
-const deleteTodo = async (id: number) => {
+const deleteAllTodos = async () => {
     try {
-        const response = await fetch(`https://todo-app-production-edaa.up.railway.app/todos/${id}`, {
+        const response = await fetch(`https://todo-app-production-edaa.up.railway.app/todos`, {
             method: 'DELETE'
         });
-
+        
         if (!response.ok) {
-            throw new Error('Failed to delete todo');
+            throw new Error('Failed to delete all todos');
         }
 
         const text = await response.text();
@@ -14,8 +14,9 @@ const deleteTodo = async (id: number) => {
         return data;
     } catch (error) {
         console.error(error);
+
         throw error;
     }
 }
 
-export default deleteTodo;
+export default deleteAllTodos;
