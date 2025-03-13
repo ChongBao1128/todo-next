@@ -2,6 +2,10 @@
 
 A simple TODO application built with Next.js and ShadCN UI.
 
+
+> [!Note]
+> Highlight: You can try the demo at https://todo-next-ten-ebon.vercel.app/ without needing to clone the project.
+
 ## Clone the Repository
 
 ### Using HTTPS
