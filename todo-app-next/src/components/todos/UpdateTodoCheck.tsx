@@ -1,7 +1,6 @@
 'use client';
 
-import fetchTodos from "@/api/fetchTodos";
-import updateTodoStatus from "@/api/updateTodos";
+import updateTodoStatus from "@/api/updateTodoStatus";
 
 type TaskStatus = {
     id: number;
