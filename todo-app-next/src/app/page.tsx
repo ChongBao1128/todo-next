@@ -9,6 +9,7 @@ import AddNewTodo from '@/components/todos/AddNewTodo';
 import UpdateTodoCheck from '@/components/todos/UpdateTodoCheck';
 import deleteTodo from '@/api/deleteTodo';
 import EditableTask, { Task } from '@/components/todos/UpdateTodoTask';
+import deleteAllTodos from '@/api/deleteAllTodos';
 
 const TodoApp = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
@@ -35,6 +36,15 @@ const TodoApp = () => {
             console.error('Error deleting task:', error);
         }
     };
+
+    const handleDeleteAllTasks = async () => {
+        try {
+            await deleteAllTodos();
+            setTasks([]);
+        } catch (error) {
+            console.error('Error deleting all tasks:', error);
+        }
+    }
 
     return (
         <div className="max-w-2xl mx-auto p-4">
@@ -80,7 +90,7 @@ const TodoApp = () => {
 
                     {tasks && tasks.length > 0 && (
                         <div className="mt-4">
-                            <Button variant="destructive" disabled>
+                            <Button variant="destructive" className='cursor-pointer' onClick={() => handleDeleteAllTasks()}>
                                 Delete All Tasks
                             </Button>
                         </div>
