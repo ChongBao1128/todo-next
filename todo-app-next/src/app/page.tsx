@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import fetchTodos from "@/api/fetchTodos";
 import { DeleteIcon, EditIcon } from "lucide-react";
 import AddNewTodo from "@/components/todos/AddNewTodo";
+import UpdateTodoCheck from "@/components/todos/UpdateTodoCheck";
 
 // Define the task type
 type Task = {
@@ -24,7 +25,7 @@ const TodoApp = async () => {
         </CardHeader>
         <CardContent>
           
-          // Add New Task
+          {/** Add New Task */}
           <AddNewTodo />
 
           {/* Task List */}
@@ -36,12 +37,10 @@ const TodoApp = async () => {
                   className="flex items-center justify-between p-2 border rounded"
                 >
                   <div className="flex items-center gap-2">
-                    <input
-                      type="checkbox"
-                      checked={task.is_complete}
-                      readOnly
-                      className="cursor-pointer"
-                    />
+                    
+                    {/** Checkbox */}
+                    <UpdateTodoCheck id={task.id} is_complete={task.is_complete} />
+
                     <span
                       className={`${
                         task.is_complete ? "line-through text-gray-500" : ""
