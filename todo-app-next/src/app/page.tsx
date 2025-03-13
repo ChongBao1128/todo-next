@@ -14,12 +14,13 @@ import deleteAllTodos from '@/api/deleteAllTodos';
 const TodoApp = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
 
+    const loadTodos = async () => {
+      const todos = await fetchTodos();
+      setTasks(todos);
+    };
+
     useEffect(() => {
-        const loadTodos = async () => {
-            const todos = await fetchTodos();
-            setTasks(todos);
-        };
-        loadTodos();
+      loadTodos();
     }, []);
 
     const handleTaskUpdate = (updatedTask: Task) => {
@@ -53,7 +54,7 @@ const TodoApp = () => {
                     <h1 className="text-2xl font-bold">Todo App</h1>
                 </CardHeader>
                 <CardContent>
-                    <AddNewTodo />
+                  <AddNewTodo refetch={loadTodos}  />
 
                     {tasks && tasks.length > 0 ? (
                         <ul className="space-y-2">
@@ -66,6 +67,7 @@ const TodoApp = () => {
                                         <UpdateTodoCheck
                                             id={task.id}
                                             is_complete={task.is_complete}
+                                            refetch={loadTodos}
                                         />
                                         <EditableTask
                                             task={task}
