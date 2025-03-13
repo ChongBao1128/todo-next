@@ -1,7 +1,7 @@
 export type Todos = {
     id: number;
     task: string;
-    is_completed: boolean;
+    is_complete: boolean;
     inserted_at: Date;
 }
 

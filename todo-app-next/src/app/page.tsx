@@ -1,22 +1,19 @@
-'use client';
-
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import fetchTodos from "@/api/fetchTodos";
 import { DeleteIcon, EditIcon } from "lucide-react";
+import AddNewTodo from "@/components/todos/AddNewTodo";
 
 // Define the task type
 type Task = {
   id: number;
   task: string;
-  is_completed: boolean;
+  is_complete: boolean;
   inserted_at: Date;
 };
 
 const TodoApp = async () => {
-  // Fetch todos from the API
   const tasks: Task[] = await fetchTodos();
 
   return (
@@ -26,11 +23,9 @@ const TodoApp = async () => {
           <h1 className="text-2xl font-bold">Todo App</h1>
         </CardHeader>
         <CardContent>
-          {/* Add Task Section - Input remains but is read-only */}
-          <div className="flex gap-2 mb-4">
-            <Input type="text" placeholder="Add new task" value="" readOnly />
-            <Button className="w-24" disabled>Add Task</Button>
-          </div>
+          
+          // Add New Task
+          <AddNewTodo />
 
           {/* Task List */}
           {tasks && tasks.length > 0 ? (
@@ -43,13 +38,13 @@ const TodoApp = async () => {
                   <div className="flex items-center gap-2">
                     <input
                       type="checkbox"
-                      checked={task.is_completed}
+                      checked={task.is_complete}
                       readOnly
                       className="cursor-pointer"
                     />
                     <span
                       className={`${
-                        task.is_completed ? "line-through text-gray-500" : ""
+                        task.is_complete ? "line-through text-gray-500" : ""
                       }`}
                     >
                       {task.task}
