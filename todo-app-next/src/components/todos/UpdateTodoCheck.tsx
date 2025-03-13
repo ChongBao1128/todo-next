@@ -5,9 +5,10 @@ import updateTodoStatus from "@/api/updateTodoStatus";
 type TaskStatus = {
     id: number;
     is_complete: boolean;
+    refetch: () => void;
 }
 
-const UpdateTodoCheck = ({id, is_complete}: TaskStatus) => {
+const UpdateTodoCheck = ({id, is_complete, refetch}: TaskStatus) => {
 
     return (
         <input
@@ -17,6 +18,8 @@ const UpdateTodoCheck = ({id, is_complete}: TaskStatus) => {
             onChange={async () => {
                 // Update the task status
                 await updateTodoStatus({ id, is_complete });
+
+                refetch();
             }}
         />
     )
