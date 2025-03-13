@@ -6,11 +6,19 @@ export type Todos = {
 }
 
 const fetchTodos = async (): Promise<Todos[]> => {
-    const response = await fetch("https://todo-app-production-edaa.up.railway.app/todos");
+    try {
+        const response = await fetch("https://todo-app-production-edaa.up.railway.app/todos");
 
-    const data = await response.json()
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
 
-    return data;
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Failed to fetch todos:", error);
+        return [];
+    }
 }
 
 export default fetchTodos;
